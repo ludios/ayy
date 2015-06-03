@@ -12,80 +12,72 @@ class AyyError extends Error {
 	}
 }
 
-function A(value, msgOrFn) {
+function _appendExtraMessage(message, extraMessage) {
+	if(typeof extraMessage === "function") {
+		// If function returned undefined, append it anyway
+		message += `: ${extraMessage()}`;
+	} else if(extraMessage !== undefined) {
+		// We might prefer to check for arg count instead
+		// of checking for `undefined`, but using ...args would
+		// probably be slower.
+		message += `: ${extraMessage}`;
+	}
+	return message;
+}
+
+function A(value, extraMessage) {
 	if(!value) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A(...): ${inspect(value)} not truthy`;
-		}
-		throw new AyyError(msgOrFn, A);
+		const message = _appendExtraMessage(
+			`A(...): ${inspect(value)} not truthy`, extraMessage);
+		throw new AyyError(message, A);
 	}
 }
 
-A.eq = function eq(a, b, msgOrFn) {
+A.eq = function eq(a, b, extraMessage) {
 	if(a !== b) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A.eq(...): ${inspect(a)} !== ${inspect(b)}`;
-		}
-		throw new AyyError(msgOrFn, A.eq);
+		const message = _appendExtraMessage(
+			`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessage);
+		throw new AyyError(message, A.eq);
 	}
 };
 
-A.neq = function neq(a, b, msgOrFn) {
+A.neq = function neq(a, b, extraMessage) {
 	if(a === b) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A.neq(...): ${inspect(a)} === ${inspect(b)}`;
-		}
-		throw new AyyError(msgOrFn, A.neq);
+		const message = _appendExtraMessage(
+			`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessage);
+		throw new AyyError(message, A.neq);
 	}
 };
 
-A.lt = function lt(a, b, msgOrFn) {
+A.lt = function lt(a, b, extraMessage) {
 	if(!(a < b)) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A.lt(...): !(${inspect(a)} < ${inspect(b)})`;
-		}
-		throw new AyyError(msgOrFn, A.lt);
+		const message = _appendExtraMessage(
+			`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessage);
+		throw new AyyError(message, A.lt);
 	}
 };
 
-A.lte = function lte(a, b, msgOrFn) {
+A.lte = function lte(a, b, extraMessage) {
 	if(!(a <= b)) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A.lte(...): !(${inspect(a)} <= ${inspect(b)})`;
-		}
-		throw new AyyError(msgOrFn, A.lte);
+		const message = _appendExtraMessage(
+			`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessage);
+		throw new AyyError(message, A.lte);
 	}
 };
 
-A.gt = function gt(a, b, msgOrFn) {
+A.gt = function gt(a, b, extraMessage) {
 	if(!(a > b)) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A.gt(...): !(${inspect(a)} > ${inspect(b)})`;
-		}
-		throw new AyyError(msgOrFn, A.gt);
+		const message = _appendExtraMessage(
+			`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessage);
+		throw new AyyError(message, A.gt);
 	}
 };
 
-A.gte = function gte(a, b, msgOrFn) {
+A.gte = function gte(a, b, extraMessage) {
 	if(!(a >= b)) {
-		if(typeof msgOrFn === "function") {
-			msgOrFn = msgOrFn();
-		} else if(msgOrFn === undefined) {
-			msgOrFn = `A.gte(...): !(${inspect(a)} >= ${inspect(b)})`;
-		}
-		throw new AyyError(msgOrFn, A.gt);
+		const message = _appendExtraMessage(
+			`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessage);
+		throw new AyyError(message, A.gte);
 	}
 };
 
