@@ -10,8 +10,8 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha tests/*.js && ./node_modules/.bin/eslint .",
-    "test-strong-mode": "iojs --strong_mode ./node_modules/.bin/_mocha tests/*.js"
+    "test": "iojs --strong-mode --harmony-rest-parameters --harmony-arrow-functions ./node_modules/.bin/_mocha tests/*.js && ./node_modules/.bin/eslint .",
+    "test-strong-mode": "iojs --strong-mode --harmony-rest-parameters --harmony-arrow-functions ./node_modules/.bin/_mocha tests/*.js"
   },
   "devDependencies": {
     "co": "^4.5.4",

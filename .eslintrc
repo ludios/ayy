@@ -42,7 +42,9 @@
 
 		/* We sometimes use 'function() { new X() }` in a test to test
 		 * for exceptions thrown in the constructor. */
-		"no-new": 0
+		"no-new": 0,
+
+		"new-cap": 0
 	},
 	"env": {
 		"es6": true,
