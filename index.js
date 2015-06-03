@@ -14,7 +14,7 @@ class AyyError extends Error {
 
 function _appendExtraMessage(message, extraMessage) {
 	if(typeof extraMessage === "function") {
-		// If function returned undefined, append it anyway
+		// If function returns undefined, append value anyway
 		message += `: ${extraMessage()}`;
 	} else if(extraMessage !== undefined) {
 		// We might prefer to check for arg count instead
