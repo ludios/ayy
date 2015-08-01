@@ -1,6 +1,6 @@
 {
   "name": "ayy",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Assert module for io.js that 1) appends the provided message to the default message, instead of replacing it 2) supports calling a function to get the message 3) A.eq does ===; no support for == or !=",
   "homepage": "https://github.com/ludios/ayy",
   "issues": "https://github.com/ludios/ayy/issues",
@@ -10,12 +10,12 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "iojs --strong-mode --harmony-rest-parameters --harmony-arrow-functions ./node_modules/.bin/_mocha tests/*.js && ./node_modules/.bin/eslint .",
+    "test": "iojs --harmony-rest-parameters --harmony-arrow-functions ./node_modules/.bin/_mocha tests/*.js && ./node_modules/.bin/eslint .",
     "test-strong-mode": "iojs --strong-mode --harmony-rest-parameters --harmony-arrow-functions ./node_modules/.bin/_mocha tests/*.js"
   },
   "devDependencies": {
     "co": "^4.6.0",
-    "eslint": "^0.24.1",
+    "eslint": "^1.0.0",
     "mocha": "^2.2.5"
   },
   "author": "Ivan Kozik",
