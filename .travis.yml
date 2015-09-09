@@ -1,4 +1,5 @@
 language: node_js
+
 node_js:
   - "4.0.0"
   - "iojs-v3.3.0"
@@ -8,6 +9,14 @@ node_js:
   - "iojs-v2.2.1"
   - "iojs-v2.1.0"
   - "iojs-v2.0.0"
+
 os:
   - linux
   - osx
+
+before_install:
+  # needed because travis doesn't install nvm on OS X builders
+  - git clone https://github.com/creationix/nvm.git /tmp/.nvm
+  - source /tmp/.nvm/nvm.sh
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
