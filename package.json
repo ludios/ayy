@@ -9,6 +9,7 @@
     "assertion"
   ],
   "main": "index.js",
+  "types": "index.d.ts",
   "type": "module",
   "scripts": {
     "build": "./node_modules/.bin/tsc",
