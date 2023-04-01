@@ -1,5 +1,5 @@
 import test from "ava";
-import {default as A, AssertionError} from "../index.js";
+import { A, AssertionError } from "../index.js";
 
 test('A', t => {
 	// number messages are supported despite not being validly typed

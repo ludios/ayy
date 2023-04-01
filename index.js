@@ -7,13 +7,12 @@ export class AssertionError extends Error {
         Error.captureStackTrace(this, stackStartFn);
     }
 }
-const fn = Symbol("A.fn");
 // In all of our assert functions e.g. `A` or `A.eq`, we require the user to
 // explicitly pass the symbol `A.fn` to indicate that they want a function to
 // be called to get the message. This prevents the unintended calling of a
 // function in some variable that was expected to contain a string.
 function _appendExtraMessage(message, extraMessage, messageFn) {
-    if (extraMessage === fn) {
+    if (extraMessage === A.fn) {
         // If function returns undefined, append value anyway
         message += `: ${messageFn()}`;
     }
@@ -25,13 +24,13 @@ function _appendExtraMessage(message, extraMessage, messageFn) {
     }
     return message;
 }
-export default function A(value, extraMessage, messageFn) {
+export function A(value, extraMessage, messageFn) {
     if (!value) {
         const message = _appendExtraMessage(`A(...): ${inspect(value)} not truthy`, extraMessage, messageFn);
         throw new AssertionError(message, A);
     }
 }
-A.fn = fn;
+A.fn = Symbol("A.fn");
 A.eq = function eq(a, b, extraMessage, messageFn) {
     if (a !== b) {
         const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessage, messageFn);
