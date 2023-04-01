@@ -1,9 +1,9 @@
 import { inspect } from "util";
 
-export class AyyError extends Error {
+export class AssertionError extends Error {
 	constructor(message, stackStartFunction) {
 		super();
-		this.name = 'AyyError';
+		this.name = 'AssertionError';
 		this.message = message;
 		Error.captureStackTrace(this, stackStartFunction);
 	}
@@ -28,7 +28,7 @@ export default function A(value, extraMessage, messageFn) {
 	if (!value) {
 		const message = _appendExtraMessage(
 			`A(...): ${inspect(value)} not truthy`, extraMessage, messageFn);
-		throw new AyyError(message, A);
+		throw new AssertionError(message, A);
 	}
 }
 
@@ -38,7 +38,7 @@ A.eq = function eq(a, b, extraMessage, messageFn) {
 	if (a !== b) {
 		const message = _appendExtraMessage(
 			`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessage, messageFn);
-		throw new AyyError(message, A.eq);
+		throw new AssertionError(message, A.eq);
 	}
 };
 
@@ -46,7 +46,7 @@ A.neq = function neq(a, b, extraMessage, messageFn) {
 	if (a === b) {
 		const message = _appendExtraMessage(
 			`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessage, messageFn);
-		throw new AyyError(message, A.neq);
+		throw new AssertionError(message, A.neq);
 	}
 };
 
@@ -54,7 +54,7 @@ A.lt = function lt(a, b, extraMessage, messageFn) {
 	if (!(a < b)) {
 		const message = _appendExtraMessage(
 			`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessage, messageFn);
-		throw new AyyError(message, A.lt);
+		throw new AssertionError(message, A.lt);
 	}
 };
 
@@ -62,7 +62,7 @@ A.lte = function lte(a, b, extraMessage, messageFn) {
 	if (!(a <= b)) {
 		const message = _appendExtraMessage(
 			`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessage, messageFn);
-		throw new AyyError(message, A.lte);
+		throw new AssertionError(message, A.lte);
 	}
 };
 
@@ -70,7 +70,7 @@ A.gt = function gt(a, b, extraMessage, messageFn) {
 	if (!(a > b)) {
 		const message = _appendExtraMessage(
 			`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessage, messageFn);
-		throw new AyyError(message, A.gt);
+		throw new AssertionError(message, A.gt);
 	}
 };
 
@@ -78,6 +78,6 @@ A.gte = function gte(a, b, extraMessage, messageFn) {
 	if (!(a >= b)) {
 		const message = _appendExtraMessage(
 			`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessage, messageFn);
-		throw new AyyError(message, A.gte);
+		throw new AssertionError(message, A.gte);
 	}
 };

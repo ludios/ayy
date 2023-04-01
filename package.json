@@ -21,6 +21,6 @@
   "license": "ISC",
   "repository": "ludios/ayy",
   "engines": {
-    "node": ">= 4.4.0"
+    "node": ">= 14"
   }
 }
