@@ -9,9 +9,9 @@ export class AssertionError extends Error {
 }
 const fn = Symbol("A.fn");
 // In all of our assert functions e.g. `A` or `A.eq`, we require the user to
-// explicitly pass `A.fn` to indicate that they want a function to be called
-// to get the message. This prevents the unintended calling of a function in
-// some variable that was expected to contain a string.
+// explicitly pass the symbol `A.fn` to indicate that they want a function to
+// be called to get the message. This prevents the unintended calling of a
+// function in some variable that was expected to contain a string.
 function _appendExtraMessage(message, extraMessage, messageFn) {
     if (extraMessage === fn) {
         // If function returns undefined, append value anyway

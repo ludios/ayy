@@ -12,13 +12,13 @@ export class AssertionError extends Error {
 const fn = Symbol("A.fn");
 
 // In all of our assert functions e.g. `A` or `A.eq`, we require the user to
-// explicitly pass `A.fn` to indicate that they want a function to be called
-// to get the message. This prevents the unintended calling of a function in
-// some variable that was expected to contain a string.
-function _appendExtraMessage(message: string, extraMessage: string | Symbol, messageFn: () => string) {
+// explicitly pass the symbol `A.fn` to indicate that they want a function to
+// be called to get the message. This prevents the unintended calling of a
+// function in some variable that was expected to contain a string.
+function _appendExtraMessage(message: string, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (extraMessage === fn) {
 		// If function returns undefined, append value anyway
-		message += `: ${messageFn()}`;
+		message += `: ${messageFn!()}`;
 	} else if (extraMessage !== undefined) {
 		// We might prefer to check for arg count instead
 		// of checking for `undefined`, but using ...args would
@@ -28,7 +28,7 @@ function _appendExtraMessage(message: string, extraMessage: string | Symbol, mes
 	return message;
 }
 
-export default function A(value: unknown, extraMessage: string | Symbol, messageFn: () => string) {
+export default function A(value: unknown, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (!value) {
 		const message = _appendExtraMessage(
 			`A(...): ${inspect(value)} not truthy`, extraMessage, messageFn);
@@ -38,7 +38,7 @@ export default function A(value: unknown, extraMessage: string | Symbol, message
 
 A.fn = fn;
 
-A.eq = function eq(a: any, b: any, extraMessage: string | Symbol, messageFn: () => string) {
+A.eq = function eq(a: any, b: any, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (a !== b) {
 		const message = _appendExtraMessage(
 			`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessage, messageFn);
@@ -46,7 +46,7 @@ A.eq = function eq(a: any, b: any, extraMessage: string | Symbol, messageFn: () 
 	}
 };
 
-A.neq = function neq(a: any, b: any, extraMessage: string | Symbol, messageFn: () => string) {
+A.neq = function neq(a: any, b: any, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (a === b) {
 		const message = _appendExtraMessage(
 			`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessage, messageFn);
@@ -54,7 +54,7 @@ A.neq = function neq(a: any, b: any, extraMessage: string | Symbol, messageFn: (
 	}
 };
 
-A.lt = function lt(a: any, b: any, extraMessage: string | Symbol, messageFn: () => string) {
+A.lt = function lt(a: any, b: any, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (!(a < b)) {
 		const message = _appendExtraMessage(
 			`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessage, messageFn);
@@ -62,7 +62,7 @@ A.lt = function lt(a: any, b: any, extraMessage: string | Symbol, messageFn: () 
 	}
 };
 
-A.lte = function lte(a: any, b: any, extraMessage: string | Symbol, messageFn: () => string) {
+A.lte = function lte(a: any, b: any, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (!(a <= b)) {
 		const message = _appendExtraMessage(
 			`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessage, messageFn);
@@ -70,7 +70,7 @@ A.lte = function lte(a: any, b: any, extraMessage: string | Symbol, messageFn: (
 	}
 };
 
-A.gt = function gt(a: any, b: any, extraMessage: string | Symbol, messageFn: () => string) {
+A.gt = function gt(a: any, b: any, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (!(a > b)) {
 		const message = _appendExtraMessage(
 			`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessage, messageFn);
@@ -78,7 +78,7 @@ A.gt = function gt(a: any, b: any, extraMessage: string | Symbol, messageFn: () 
 	}
 };
 
-A.gte = function gte(a: any, b: any, extraMessage: string | Symbol, messageFn: () => string) {
+A.gte = function gte(a: any, b: any, extraMessage?: string | Symbol, messageFn?: () => string) {
 	if (!(a >= b)) {
 		const message = _appendExtraMessage(
 			`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessage, messageFn);

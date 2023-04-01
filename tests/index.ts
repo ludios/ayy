@@ -2,6 +2,8 @@ import test from "ava";
 import {default as A, AssertionError} from "../index.js";
 
 test('A', t => {
+	// number messages are supported despite not being validly typed
+	// @ts-expect-error
 	A(3, 3);
 	t.throws(() => A(false), {instanceOf: AssertionError, message: /^A\(\.\.\.\): false not truthy$/});
 	t.throws(() => A(false), {instanceOf: AssertionError, message: /^A\(\.\.\.\): false not truthy$/});
@@ -23,11 +25,14 @@ test('A', t => {
 		t.is(e.toString(), "AssertionError: A(...): 0 not truthy: explanation");
 	}
 	try {
+		// @ts-expect-error
 		A(0, A.fn, () => undefined);
 	} catch (e) {
 		t.is(e.toString(), "AssertionError: A(...): 0 not truthy: undefined");
 	}
 	try {
+		// number messages are supported despite not being validly typed
+		// @ts-expect-error
 		A(0, 0);
 	} catch (e) {
 		t.is(e.toString(), "AssertionError: A(...): 0 not truthy: 0");
