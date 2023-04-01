@@ -11,11 +11,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "./node_modules/.bin/tsc",
     "test": "./node_modules/.bin/ava && ./node_modules/.bin/eslint ."
   },
   "devDependencies": {
+    "@types/node": "^18.15.11",
     "ava": "^5.2.0",
-    "eslint": "^3.5.0"
+    "eslint": "^3.5.0",
+    "typescript": "^5.0.3"
   },
   "author": "Ivan Kozik",
   "license": "ISC",
