@@ -9,12 +9,13 @@
     "assertion"
   ],
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "node ./node_modules/.bin/_mocha tests/*.js && ./node_modules/.bin/eslint ."
+    "test": "./node_modules/.bin/ava && ./node_modules/.bin/eslint ."
   },
   "devDependencies": {
-    "eslint": "^3.5.0",
-    "mocha": "^3.0.2"
+    "ava": "^5.2.0",
+    "eslint": "^3.5.0"
   },
   "author": "Ivan Kozik",
   "license": "ISC",

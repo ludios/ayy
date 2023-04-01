@@ -1,8 +1,6 @@
-"use strict";
+import { inspect } from "util";
 
-const inspect = require('util').inspect;
-
-class AyyError extends Error {
+export class AyyError extends Error {
 	constructor(message, stackStartFunction) {
 		super();
 		this.name = 'AyyError';
@@ -14,10 +12,10 @@ class AyyError extends Error {
 const fn = Symbol("A.fn");
 
 function _appendExtraMessage(message, extraMessage, messageFn) {
-	if(extraMessage === fn) {
+	if (extraMessage === fn) {
 		// If function returns undefined, append value anyway
 		message += `: ${messageFn()}`;
-	} else if(extraMessage !== undefined) {
+	} else if (extraMessage !== undefined) {
 		// We might prefer to check for arg count instead
 		// of checking for `undefined`, but using ...args would
 		// probably be slower.
@@ -26,16 +24,18 @@ function _appendExtraMessage(message, extraMessage, messageFn) {
 	return message;
 }
 
-function A(value, extraMessage, messageFn) {
-	if(!value) {
+export default function A(value, extraMessage, messageFn) {
+	if (!value) {
 		const message = _appendExtraMessage(
 			`A(...): ${inspect(value)} not truthy`, extraMessage, messageFn);
 		throw new AyyError(message, A);
 	}
 }
 
+A.fn = fn;
+
 A.eq = function eq(a, b, extraMessage, messageFn) {
-	if(a !== b) {
+	if (a !== b) {
 		const message = _appendExtraMessage(
 			`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessage, messageFn);
 		throw new AyyError(message, A.eq);
@@ -43,7 +43,7 @@ A.eq = function eq(a, b, extraMessage, messageFn) {
 };
 
 A.neq = function neq(a, b, extraMessage, messageFn) {
-	if(a === b) {
+	if (a === b) {
 		const message = _appendExtraMessage(
 			`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessage, messageFn);
 		throw new AyyError(message, A.neq);
@@ -51,7 +51,7 @@ A.neq = function neq(a, b, extraMessage, messageFn) {
 };
 
 A.lt = function lt(a, b, extraMessage, messageFn) {
-	if(!(a < b)) {
+	if (!(a < b)) {
 		const message = _appendExtraMessage(
 			`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessage, messageFn);
 		throw new AyyError(message, A.lt);
@@ -59,7 +59,7 @@ A.lt = function lt(a, b, extraMessage, messageFn) {
 };
 
 A.lte = function lte(a, b, extraMessage, messageFn) {
-	if(!(a <= b)) {
+	if (!(a <= b)) {
 		const message = _appendExtraMessage(
 			`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessage, messageFn);
 		throw new AyyError(message, A.lte);
@@ -67,7 +67,7 @@ A.lte = function lte(a, b, extraMessage, messageFn) {
 };
 
 A.gt = function gt(a, b, extraMessage, messageFn) {
-	if(!(a > b)) {
+	if (!(a > b)) {
 		const message = _appendExtraMessage(
 			`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessage, messageFn);
 		throw new AyyError(message, A.gt);
@@ -75,13 +75,9 @@ A.gt = function gt(a, b, extraMessage, messageFn) {
 };
 
 A.gte = function gte(a, b, extraMessage, messageFn) {
-	if(!(a >= b)) {
+	if (!(a >= b)) {
 		const message = _appendExtraMessage(
 			`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessage, messageFn);
 		throw new AyyError(message, A.gte);
 	}
 };
-
-A.fn = fn;
-A.AyyError = AyyError;
-module.exports = A;
