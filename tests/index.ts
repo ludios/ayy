@@ -22,11 +22,11 @@ test('A', t => {
 
 test('A.eq', t => {
 	A.eq(3, 3);
-	t.throws(() => A.eq(3, "3"), {instanceOf: AssertionError, message: "A.eq(...): 3 !== '3'"});
+	t.throws(() => A.eq(3, 4), {instanceOf: AssertionError, message: "A.eq(...): 3 !== 4"});
 });
 
 test('A.neq', t => {
-	A.neq(3, "3");
+	A.neq(3, 4);
 	t.throws(() => A.neq(3, 3), {instanceOf: AssertionError, message: "A.neq(...): 3 === 3"});
 });
 
