@@ -19,7 +19,7 @@
 		"@types/node": "^18.15.11",
 		"ava": "^5.2.0",
 		"eslint": "^3.5.0",
-		"ts-node": "^10.9.1",
+		"tsx": "^3.12.6",
 		"typescript": "^5.0.3"
 	},
 	"ava": {
@@ -27,7 +27,7 @@
 			"ts": "module"
 		},
 		"nodeArguments": [
-			"--loader=ts-node/esm"
+			"--loader=tsx"
 		]
 	},
 	"author": "Ivan Kozik",
