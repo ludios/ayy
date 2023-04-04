@@ -29,6 +29,12 @@ A.is = function is(a, b, extraMessageOrFn) {
         throw new AssertionError(message, A.is);
     }
 };
+A.nis = function is(a, b, extraMessageOrFn) {
+    if (Object.is(a, b)) {
+        const message = _appendExtraMessage(`A.nis(...): Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
+        throw new AssertionError(message, A.nis);
+    }
+};
 A.eq = function eq(a, b, extraMessageOrFn) {
     if (a !== b) {
         const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessageOrFn);

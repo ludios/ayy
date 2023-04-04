@@ -35,6 +35,14 @@ A.is = function is<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)) {
 	}
 };
 
+A.nis = function is<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)) {
+	if (Object.is(a, b)) {
+		const message = _appendExtraMessage(
+			`A.nis(...): Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
+		throw new AssertionError(message, A.nis);
+	}
+};
+
 A.eq = function eq<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)) {
 	if (a !== b) {
 		const message = _appendExtraMessage(

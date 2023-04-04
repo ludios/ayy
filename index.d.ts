@@ -4,6 +4,7 @@ export declare class AssertionError extends Error {
 export declare function A(value: unknown, extraMessageOrFn?: string | (() => string)): void;
 export declare namespace A {
     var is: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
+    var nis: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
     var eq: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
     var neq: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
     var lt: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
