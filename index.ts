@@ -9,7 +9,7 @@ export class AssertionError extends Error {
 	}
 }
 
-function _appendExtraMessage(message: string, extraMessageOrFn?: string | (() => string)) {
+function _appendExtraMessage(message: string, extraMessageOrFn?: string | (() => string)): string {
 	if (typeof extraMessageOrFn == "function") {
 		// If function returns undefined, append value anyway
 		message += `: ${extraMessageOrFn()}`;
