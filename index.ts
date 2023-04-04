@@ -1,4 +1,4 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 
 export class AssertionError extends Error {
 	constructor(message: string, stackStartFn: Function) {
