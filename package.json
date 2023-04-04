@@ -1,6 +1,6 @@
 {
 	"name": "ayy",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Assert module for node that 1) appends the provided message to the default message, instead of replacing it 2) supports calling a function to get the message 3) A.eq does ===; no support for == or !=",
 	"homepage": "https://github.com/ludios/ayy",
 	"issues": "https://github.com/ludios/ayy/issues",
