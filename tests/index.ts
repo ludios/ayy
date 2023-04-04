@@ -13,7 +13,7 @@ test('A', t => {
 	t.throws(() => A(0, "explanation"), {instanceOf: AssertionError, message: "A(...): 0 not truthy: explanation"});
 	t.throws(() => A(0, () => "explanation"), {instanceOf: AssertionError, message: "A(...): 0 not truthy: explanation"});
 	// undefined return is supported despite not being validly typed
-	// @ts-expect-error
+	// @ts-ignore
 	t.throws(() => A(0, () => undefined), {instanceOf: AssertionError, message: "A(...): 0 not truthy: undefined"});
 	// number messages are supported despite not being validly typed
 	// @ts-expect-error
