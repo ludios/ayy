@@ -12,11 +12,8 @@ export class AssertionError extends Error {
 function _appendExtraMessage(message: string, extraMessageOrFn?: string | (() => string)) {
 	if (typeof extraMessageOrFn == "function") {
 		// If function returns undefined, append value anyway
-		message += `: ${extraMessageOrFn!()}`;
+		message += `: ${extraMessageOrFn()}`;
 	} else if (extraMessageOrFn !== undefined) {
-		// We might prefer to check for arg count instead
-		// of checking for `undefined`, but using ...args would
-		// probably be slower.
 		message += `: ${extraMessageOrFn}`;
 	}
 	return message;

@@ -13,9 +13,6 @@ function _appendExtraMessage(message, extraMessageOrFn) {
         message += `: ${extraMessageOrFn()}`;
     }
     else if (extraMessageOrFn !== undefined) {
-        // We might prefer to check for arg count instead
-        // of checking for `undefined`, but using ...args would
-        // probably be slower.
         message += `: ${extraMessageOrFn}`;
     }
     return message;
