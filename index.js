@@ -28,99 +28,117 @@ export function A(value, extraMessageOrFn) {
         throw new AssertionError(message, A);
     }
 }
-/**
- * Assert that `a` is the same value as `b` (using `Object.is`) and throw `AssertionError` if it is not.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.is = function is(a, b, extraMessageOrFn) {
-    if (!Object.is(a, b)) {
-        const message = _appendExtraMessage(`A.is(...): !Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
-        throw new AssertionError(message, A.is);
+(function (A) {
+    /**
+     * Assert that `a` is the same value as `b` (using `Object.is`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function is(a, b, extraMessageOrFn) {
+        if (!Object.is(a, b)) {
+            const message = _appendExtraMessage(`A.is(...): !Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
+            throw new AssertionError(message, A.is);
+        }
     }
-};
-/**
- * Assert that `a` is not the same value as `b` (using `Object.is`) and throw `AssertionError` if it is.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.nis = function is(a, b, extraMessageOrFn) {
-    if (Object.is(a, b)) {
-        const message = _appendExtraMessage(`A.nis(...): Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
-        throw new AssertionError(message, A.nis);
+    A.is = is;
+    ;
+    /**
+     * Assert that `a` is not the same value as `b` (using `Object.is`) and throw `AssertionError` if it is.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function nis(a, b, extraMessageOrFn) {
+        if (Object.is(a, b)) {
+            const message = _appendExtraMessage(`A.nis(...): Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
+            throw new AssertionError(message, A.nis);
+        }
     }
-};
-/**
- * Assert that `a` is equal to `b` (`===`) and throw `AssertionError` if it is not.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.eq = function eq(a, b, extraMessageOrFn) {
-    if (a !== b) {
-        const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessageOrFn);
-        throw new AssertionError(message, A.eq);
+    A.nis = nis;
+    ;
+    /**
+     * Assert that `a` is equal to `b` (`===`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function eq(a, b, extraMessageOrFn) {
+        if (a !== b) {
+            const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessageOrFn);
+            throw new AssertionError(message, A.eq);
+        }
     }
-};
-/**
- * Assert that `a` is not equal to `b` (`!==`) and throw `AssertionError` if it is.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.neq = function neq(a, b, extraMessageOrFn) {
-    if (a === b) {
-        const message = _appendExtraMessage(`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessageOrFn);
-        throw new AssertionError(message, A.neq);
+    A.eq = eq;
+    ;
+    /**
+     * Assert that `a` is not equal to `b` (`!==`) and throw `AssertionError` if it is.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function neq(a, b, extraMessageOrFn) {
+        if (a === b) {
+            const message = _appendExtraMessage(`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessageOrFn);
+            throw new AssertionError(message, A.neq);
+        }
     }
-};
-/**
- * Assert that `a` is less than `b` (`<`) and throw `AssertionError` if it is not.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.lt = function lt(a, b, extraMessageOrFn) {
-    if (!(a < b)) {
-        const message = _appendExtraMessage(`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessageOrFn);
-        throw new AssertionError(message, A.lt);
+    A.neq = neq;
+    ;
+    /**
+     * Assert that `a` is less than `b` (`<`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function lt(a, b, extraMessageOrFn) {
+        if (!(a < b)) {
+            const message = _appendExtraMessage(`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessageOrFn);
+            throw new AssertionError(message, A.lt);
+        }
     }
-};
-/**
- * Assert that `a` is less than or equal to `b` (`<=`) and throw `AssertionError` if it is not.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.lte = function lte(a, b, extraMessageOrFn) {
-    if (!(a <= b)) {
-        const message = _appendExtraMessage(`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessageOrFn);
-        throw new AssertionError(message, A.lte);
+    A.lt = lt;
+    ;
+    /**
+     * Assert that `a` is less than or equal to `b` (`<=`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function lte(a, b, extraMessageOrFn) {
+        if (!(a <= b)) {
+            const message = _appendExtraMessage(`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessageOrFn);
+            throw new AssertionError(message, A.lte);
+        }
     }
-};
-/**
- * Assert that `a` is greater than `b` (`>`) and throw `AssertionError` if it is not.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.gt = function gt(a, b, extraMessageOrFn) {
-    if (!(a > b)) {
-        const message = _appendExtraMessage(`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessageOrFn);
-        throw new AssertionError(message, A.gt);
+    A.lte = lte;
+    ;
+    /**
+     * Assert that `a` is greater than `b` (`>`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function gt(a, b, extraMessageOrFn) {
+        if (!(a > b)) {
+            const message = _appendExtraMessage(`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessageOrFn);
+            throw new AssertionError(message, A.gt);
+        }
     }
-};
-/**
- * Assert that `a` is greater than or equal to `b` (`>=`) and throw `AssertionError` if it is not.
- * @param a first value
- * @param b second value
- * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
- */
-A.gte = function gte(a, b, extraMessageOrFn) {
-    if (!(a >= b)) {
-        const message = _appendExtraMessage(`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessageOrFn);
-        throw new AssertionError(message, A.gte);
+    A.gt = gt;
+    ;
+    /**
+     * Assert that `a` is greater than or equal to `b` (`>=`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function gte(a, b, extraMessageOrFn) {
+        if (!(a >= b)) {
+            const message = _appendExtraMessage(`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessageOrFn);
+            throw new AssertionError(message, A.gte);
+        }
     }
-};
+    A.gte = gte;
+    ;
+})(A || (A = {}));

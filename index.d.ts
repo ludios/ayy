@@ -8,12 +8,60 @@ export declare class AssertionError extends Error {
  */
 export declare function A(value: unknown, extraMessageOrFn?: string | (() => string)): void;
 export declare namespace A {
-    var is: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var nis: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var eq: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var neq: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var lt: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var lte: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var gt: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
-    var gte: <T>(a: T, b: T, extraMessageOrFn?: string | (() => string) | undefined) => void;
+    /**
+     * Assert that `a` is the same value as `b` (using `Object.is`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function is<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is not the same value as `b` (using `Object.is`) and throw `AssertionError` if it is.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function nis<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is equal to `b` (`===`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function eq<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is not equal to `b` (`!==`) and throw `AssertionError` if it is.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function neq<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is less than `b` (`<`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function lt<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is less than or equal to `b` (`<=`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function lte<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is greater than `b` (`>`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function gt<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
+    /**
+     * Assert that `a` is greater than or equal to `b` (`>=`) and throw `AssertionError` if it is not.
+     * @param a first value
+     * @param b second value
+     * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
+     */
+    function gte<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)): void;
 }
