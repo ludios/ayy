@@ -20,6 +20,11 @@ test('A', t => {
 	t.throws(() => A(0, 0), {instanceOf: AssertionError, message: "A(...): 0 not truthy: 0"});
 });
 
+test('A.is', t => {
+	A.is(NaN, NaN);
+	t.throws(() => A.is(-0, 0), {instanceOf: AssertionError, message: "A.is(...): !Object.is(-0, 0)"});
+});
+
 test('A.eq', t => {
 	A.eq(3, 3);
 	t.throws(() => A.eq(3, 4), {instanceOf: AssertionError, message: "A.eq(...): 3 !== 4"});

@@ -30,6 +30,14 @@ export function A(value: unknown, extraMessageOrFn?: string | (() => string)) {
 	}
 }
 
+A.is = function is<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)) {
+	if (!Object.is(a, b)) {
+		const message = _appendExtraMessage(
+			`A.is(...): !Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
+		throw new AssertionError(message, A.is);
+	}
+};
+
 A.eq = function eq<T>(a: T, b: T, extraMessageOrFn?: string | (() => string)) {
 	if (a !== b) {
 		const message = _appendExtraMessage(

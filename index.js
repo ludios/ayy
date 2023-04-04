@@ -26,6 +26,12 @@ export function A(value, extraMessageOrFn) {
         throw new AssertionError(message, A);
     }
 }
+A.is = function is(a, b, extraMessageOrFn) {
+    if (!Object.is(a, b)) {
+        const message = _appendExtraMessage(`A.is(...): !Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
+        throw new AssertionError(message, A.is);
+    }
+};
 A.eq = function eq(a, b, extraMessageOrFn) {
     if (a !== b) {
         const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessageOrFn);
