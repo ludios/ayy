@@ -7,63 +7,58 @@ export class AssertionError extends Error {
         Error.captureStackTrace(this, stackStartFn);
     }
 }
-// In all of our assert functions e.g. `A` or `A.eq`, we require the user to
-// explicitly pass the symbol `A.fn` to indicate that they want a function to
-// be called to get the message. This prevents the unintended calling of a
-// function in some variable that was expected to contain a string.
-function _appendExtraMessage(message, extraMessage, messageFn) {
-    if (extraMessage === A.fn) {
+function _appendExtraMessage(message, extraMessageOrFn) {
+    if (typeof extraMessageOrFn == "function") {
         // If function returns undefined, append value anyway
-        message += `: ${messageFn()}`;
+        message += `: ${extraMessageOrFn()}`;
     }
-    else if (extraMessage !== undefined) {
+    else if (extraMessageOrFn !== undefined) {
         // We might prefer to check for arg count instead
         // of checking for `undefined`, but using ...args would
         // probably be slower.
-        message += `: ${extraMessage}`;
+        message += `: ${extraMessageOrFn}`;
     }
     return message;
 }
-export function A(value, extraMessage, messageFn) {
+export function A(value, extraMessageOrFn) {
     if (!value) {
-        const message = _appendExtraMessage(`A(...): ${inspect(value)} not truthy`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A(...): ${inspect(value)} not truthy`, extraMessageOrFn);
         throw new AssertionError(message, A);
     }
 }
-A.fn = Symbol("A.fn");
-A.eq = function eq(a, b, extraMessage, messageFn) {
+A.eq = function eq(a, b, extraMessageOrFn) {
     if (a !== b) {
-        const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessageOrFn);
         throw new AssertionError(message, A.eq);
     }
 };
-A.neq = function neq(a, b, extraMessage, messageFn) {
+A.neq = function neq(a, b, extraMessageOrFn) {
     if (a === b) {
-        const message = _appendExtraMessage(`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessageOrFn);
         throw new AssertionError(message, A.neq);
     }
 };
-A.lt = function lt(a, b, extraMessage, messageFn) {
+A.lt = function lt(a, b, extraMessageOrFn) {
     if (!(a < b)) {
-        const message = _appendExtraMessage(`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessageOrFn);
         throw new AssertionError(message, A.lt);
     }
 };
-A.lte = function lte(a, b, extraMessage, messageFn) {
+A.lte = function lte(a, b, extraMessageOrFn) {
     if (!(a <= b)) {
-        const message = _appendExtraMessage(`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessageOrFn);
         throw new AssertionError(message, A.lte);
     }
 };
-A.gt = function gt(a, b, extraMessage, messageFn) {
+A.gt = function gt(a, b, extraMessageOrFn) {
     if (!(a > b)) {
-        const message = _appendExtraMessage(`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessageOrFn);
         throw new AssertionError(message, A.gt);
     }
 };
-A.gte = function gte(a, b, extraMessage, messageFn) {
+A.gte = function gte(a, b, extraMessageOrFn) {
     if (!(a >= b)) {
-        const message = _appendExtraMessage(`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessage, messageFn);
+        const message = _appendExtraMessage(`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessageOrFn);
         throw new AssertionError(message, A.gte);
     }
 };
