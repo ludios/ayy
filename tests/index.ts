@@ -21,13 +21,13 @@ test('A', t => {
 });
 
 test('A.is', t => {
-	A.is(NaN, NaN);
+	A.is(Number.NaN, Number.NaN);
 	t.throws(() => A.is(-0, 0), {instanceOf: AssertionError, message: "A.is(...): !Object.is(-0, 0)"});
 });
 
 test('A.nis', t => {
 	A.nis(-0, 0);
-	t.throws(() => A.nis(NaN, NaN), {instanceOf: AssertionError, message: "A.nis(...): Object.is(NaN, NaN)"});
+	t.throws(() => A.nis(Number.NaN, Number.NaN), {instanceOf: AssertionError, message: "A.nis(...): Object.is(NaN, NaN)"});
 });
 
 test('A.eq', t => {

@@ -1,0 +1,15 @@
+{
+	"files": {
+		"include": ["index.ts", "tests/*.ts"]
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"nursery": {
+				"noDoneCallback": {
+					"level": "off"
+				}
+			}
+		}
+	}
+}

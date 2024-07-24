@@ -13,7 +13,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "./node_modules/.bin/tsc",
-		"test": "./node_modules/.bin/ava && ./node_modules/.bin/tsc --noEmit tests/*.ts && biome lint ."
+		"test": "./node_modules/.bin/ava && ./node_modules/.bin/tsc --noEmit tests/*.ts && biome lint"
 	},
 	"devDependencies": {
 		"@types/node": "^20.14.12",
