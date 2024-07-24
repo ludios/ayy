@@ -1,5 +1,6 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 export class AssertionError extends Error {
+    // biome-ignore lint/complexity/noBannedTypes: Function is what stackStartFn is
     constructor(message, stackStartFn) {
         super();
         this.name = 'AssertionError';
@@ -8,14 +9,15 @@ export class AssertionError extends Error {
     }
 }
 function _appendExtraMessage(message, extraMessageOrFn) {
-    if (typeof extraMessageOrFn == "function") {
+    let out = message;
+    if (typeof extraMessageOrFn === "function") {
         // If function returns undefined, append value anyway
-        message += `: ${extraMessageOrFn()}`;
+        out += `: ${extraMessageOrFn()}`;
     }
     else if (extraMessageOrFn !== undefined) {
-        message += `: ${extraMessageOrFn}`;
+        out += `: ${extraMessageOrFn}`;
     }
-    return message;
+    return out;
 }
 /**
  * Assert that `value` is truthy and throw `AssertionError` if it is not.
