@@ -10,9 +10,9 @@ export class AssertionError extends Error {
 	}
 }
 
-type ExtraMessageOrFn = string | (() => string);
+type MessageOrFn = string | (() => string);
 
-function _appendExtraMessage(message: string, extraMessageOrFn?: ExtraMessageOrFn): string {
+function _appendExtraMessage(message: string, extraMessageOrFn?: MessageOrFn): string {
 	let out = message;
 	if (typeof extraMessageOrFn === "function") {
 		// If function returns undefined, append value anyway
@@ -28,7 +28,7 @@ function _appendExtraMessage(message: string, extraMessageOrFn?: ExtraMessageOrF
  * @param value value to test
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function base_A(value: unknown, extraMessageOrFn?: ExtraMessageOrFn): asserts value {
+function base_A(value: unknown, extraMessageOrFn?: MessageOrFn): asserts value {
 	if (!value) {
 		const message = _appendExtraMessage(
 			`A(...): ${inspect(value)} not truthy`, extraMessageOrFn);
@@ -42,7 +42,7 @@ function base_A(value: unknown, extraMessageOrFn?: ExtraMessageOrFn): asserts va
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function is<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function is<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (!Object.is(a, b)) {
 		const message = _appendExtraMessage(
 			`A.is(...): !Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
@@ -56,7 +56,7 @@ function is<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function nis<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function nis<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (Object.is(a, b)) {
 		const message = _appendExtraMessage(
 			`A.nis(...): Object.is(${inspect(a)}, ${inspect(b)})`, extraMessageOrFn);
@@ -70,7 +70,7 @@ function nis<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function eq<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function eq<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (a !== b) {
 		const message = _appendExtraMessage(
 			`A.eq(...): ${inspect(a)} !== ${inspect(b)}`, extraMessageOrFn);
@@ -84,7 +84,7 @@ function eq<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function neq<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function neq<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (a === b) {
 		const message = _appendExtraMessage(
 			`A.neq(...): ${inspect(a)} === ${inspect(b)}`, extraMessageOrFn);
@@ -98,7 +98,7 @@ function neq<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function lt<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function lt<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (!(a < b)) {
 		const message = _appendExtraMessage(
 			`A.lt(...): !(${inspect(a)} < ${inspect(b)})`, extraMessageOrFn);
@@ -112,7 +112,7 @@ function lt<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function lte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function lte<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (!(a <= b)) {
 		const message = _appendExtraMessage(
 			`A.lte(...): !(${inspect(a)} <= ${inspect(b)})`, extraMessageOrFn);
@@ -126,7 +126,7 @@ function lte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function gt<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function gt<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (!(a > b)) {
 		const message = _appendExtraMessage(
 			`A.gt(...): !(${inspect(a)} > ${inspect(b)})`, extraMessageOrFn);
@@ -140,7 +140,7 @@ function gt<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
  * @param b second value
  * @param extraMessageOrFn string to append to the assertion error, or a 0-arg callable that returns such a string
  */
-function gte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
+function gte<T>(a: T, b: T, extraMessageOrFn?: MessageOrFn) {
 	if (!(a >= b)) {
 		const message = _appendExtraMessage(
 			`A.gte(...): !(${inspect(a)} >= ${inspect(b)})`, extraMessageOrFn);
@@ -152,7 +152,7 @@ function gte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
 // and the rest work without using `namespace`.
 
 interface AssertionFn {
-	(value: unknown, extraMessageOrFn?: ExtraMessageOrFn): asserts value;
+	(value: unknown, extraMessageOrFn?: MessageOrFn): asserts value;
 
 	is:  typeof is;
 	nis: typeof nis;
