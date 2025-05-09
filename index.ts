@@ -154,14 +154,14 @@ function gte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn) {
 interface AssertionFn {
 	(value: unknown, extraMessageOrFn?: ExtraMessageOrFn): asserts value;
 
-	is<T> (a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	nis<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	eq<T> (a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	neq<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	lt<T> (a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	lte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	gt<T> (a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
-	gte<T>(a: T, b: T, extraMessageOrFn?: ExtraMessageOrFn): void;
+	is:  typeof is;
+	nis: typeof nis;
+	eq:  typeof eq;
+	neq: typeof neq;
+	lt:  typeof lt;
+	lte: typeof lte;
+	gt:  typeof gt;
+	gte: typeof gte;
 }
 
 export const A: AssertionFn = Object.assign(base_A, {
