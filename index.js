@@ -3,7 +3,7 @@ export class AssertionError extends Error {
     // biome-ignore lint/complexity/noBannedTypes: Function is what stackStartFn is
     constructor(message, stackStartFn) {
         super();
-        this.name = 'AssertionError';
+        this.name = "AssertionError";
         this.message = message;
         Error.captureStackTrace(this, stackStartFn);
     }
