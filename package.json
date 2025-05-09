@@ -13,20 +13,17 @@
 	"type": "module",
 	"scripts": {
 		"build": "./node_modules/.bin/tsc",
-		"test": "./node_modules/.bin/ava && ./node_modules/.bin/tsc --noEmit tests/*.ts && biome lint"
+		"test": "./node_modules/.bin/ava tests/*.ts && ./node_modules/.bin/tsc --noEmit tests/*.ts && biome lint"
 	},
 	"devDependencies": {
 		"@types/node": "^22.15.17",
 		"ava": "^6.3.0",
-		"tsx": "^4.19.4",
 		"typescript": "^5.8.3"
 	},
 	"ava": {
-		"extensions": {
-			"ts": "commonjs"
-		},
 		"nodeArguments": [
-			"--import=tsx"
+			"--experimental-strip-types",
+			"--no-warnings=ExperimentalWarning"
 		]
 	},
 	"author": "Ivan Kozik",
