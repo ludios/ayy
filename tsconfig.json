@@ -3,7 +3,6 @@
 		"index.ts"
 	],
 	"compilerOptions": {
-		"moduleResolution": "node",
 		"module": "esnext",
 		"target": "esnext",
 		"esModuleInterop": true,
