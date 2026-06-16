@@ -31,10 +31,5 @@
 	"repository": "ludios/ayy",
 	"engines": {
 		"node": ">= 14"
-	},
-	"pnpm": {
-		"overrides": {
-			"esbuild": "0.25.3"
-		}
 	}
 }
