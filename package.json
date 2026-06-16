@@ -16,9 +16,9 @@
 		"test": "./node_modules/.bin/ava tests/*.ts && ./node_modules/.bin/tsc --noEmit tests/*.ts && biome lint"
 	},
 	"devDependencies": {
-		"@types/node": "^22.15.17",
-		"ava": "^6.3.0",
-		"typescript": "^5.8.3"
+		"@types/node": "^22.19.21",
+		"ava": "^6.4.1",
+		"typescript": "^5.9.3"
 	},
 	"ava": {
 		"nodeArguments": [
