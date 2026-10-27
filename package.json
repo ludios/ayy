@@ -15,6 +15,12 @@
 		"index.d.ts"
 	],
 	"type": "module",
+	"imports": {
+		"#inspect": {
+			"node": "util",
+			"default": "@ludios/node-inspect-extracted"
+		}
+	},
 	"scripts": {
 		"build": "tsc",
 		"test": "vitest run && tsc --ignoreConfig --types node --noEmit tests/*.ts vitest.config.ts && biome lint"
@@ -34,6 +40,6 @@
 	"license": "ISC",
 	"repository": "ludios/ayy",
 	"engines": {
-		"node": "^20.16 || >=22.3"
+		"node": ">= 14"
 	}
 }

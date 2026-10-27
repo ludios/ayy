@@ -1,24 +1,16 @@
 // Model-output: Claude Opus 5.5
-import { inspect as extracted_inspect } from "@ludios/node-inspect-extracted";
+// package.json's "imports" makes this `util.inspect` in Node, Bun, and Deno, and elsewhere,
+// like in browsers, node-inspect-extracted's copy of it.
+import { inspect as util_inspect } from "#inspect";
 /**
- * Get the runtime's `util.inspect`.
- * @returns `util.inspect` in Node, Bun, and Deno; undefined in runtimes without it, like browsers
- */
-function runtime_inspect() {
-    // Browsers can't import "node:util", so this module doesn't.
-    const { process } = globalThis;
-    return process?.getBuiltinModule?.("node:util")?.inspect;
-}
-/**
- * Format `value` for an assertion error message with the runtime's `util.inspect`, or else with
- * node-inspect-extracted, a copy of it for runtimes without it, like browsers.
+ * Format `value` for an assertion error message with `util.inspect`.
  * @returns the formatted value, or if formatting it threw (e.g. for a revoked Proxy outside Node,
  *          or a custom inspect function with a bug), "<uninspectable value: ...>" with what was
  *          thrown, so that the assertion still fails with its own error
  */
 function inspect(value) {
     try {
-        return (runtime_inspect() ?? extracted_inspect)(value);
+        return util_inspect(value);
     }
     catch (error) {
         return `<uninspectable value: ${error instanceof Error ? `${error.name}: ${error.message}` : typeof error}>`;
