@@ -1,9 +1,12 @@
+// Model-output: Claude Opus 5.5
 {
 	"files": [
 		"index.ts"
 	],
 	"compilerOptions": {
-		"types": ["node"],
+		// Only ECMAScript, no Node or DOM APIs, so that ayy works in any JavaScript runtime
+		"lib": ["esnext"],
+		"types": [],
 		"module": "esnext",
 		"target": "esnext",
 		"esModuleInterop": true,

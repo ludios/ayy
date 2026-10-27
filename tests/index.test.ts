@@ -111,3 +111,19 @@ test("AssertionError works without Error.captureStackTrace", () => {
 	expect(error).toBeInstanceOf(AssertionError);
 	expect(error).toHaveProperty("message", "A.eq(...): 3 !== 4");
 });
+
+test("messages show values the way util.inspect does", () => {
+	class Point {
+		x = 1;
+		y = 2;
+	}
+	expect_assertion_error(() => A.eq("it's", "a\nb"), `A.eq(...): "it's" !== 'a\\nb'`);
+	expect_assertion_error(() => A.eq<unknown>(3n, Symbol("s")), "A.eq(...): 3n !== Symbol(s)");
+	expect_assertion_error(() => A.is<unknown>({ a: [1, "b"], "c-d": null }, [undefined]),
+		"A.is(...): !Object.is({ a: [ 1, 'b' ], 'c-d': null }, [ undefined ])");
+	expect_assertion_error(() => A.is<unknown>(new Point(), new Map([["k", new Set([1])]])),
+		"A.is(...): !Object.is(Point { x: 1, y: 2 }, Map(1) { 'k' => Set(1) { 1 } })");
+	expect_assertion_error(() => A.lt<unknown>(new Date(0), function f() {}),
+		"A.lt(...): !(1970-01-01T00:00:00.000Z < [Function: f])");
+	expect_assertion_error(() => A.neq<unknown>(Point, Point), "A.neq(...): [class Point] === [class Point]");
+});
