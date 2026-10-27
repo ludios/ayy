@@ -13,7 +13,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "./node_modules/.bin/tsc",
-		"test": "vitest run && ./node_modules/.bin/tsc --ignoreConfig --types node --noEmit tests/*.ts && biome lint"
+		"test": "vitest run --dir tests && ./node_modules/.bin/tsc --ignoreConfig --types node --noEmit tests/*.ts && biome lint"
 	},
 	"devDependencies": {
 		"@types/node": "^26.6.5",
