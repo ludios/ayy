@@ -19,7 +19,7 @@ All thinking is hidden from the user, so if you find anything they may wish to k
 
 Your `Bash` tool uses zsh, not bash.
 
-You're on NixOS 26.05; many things are installed, including:
+You're on NixOS and many things are installed, including:
 
 ripgrep, ripgrep-all, node, deno, pnpm, oxfmt, oxlint, jq, python3, uv, psql, ephemeralpg (bin: pg_tmp), google-chrome, curl-impersonate, gcc, go, rustc, cargo, patchelf, zip, unzip, zstd, dmesg, perf, hyperfine, codex, claude.
 
