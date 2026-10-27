@@ -132,12 +132,14 @@ Edit `index.ts` only: `index.js` and `index.d.ts` are generated from it by `pnpm
 
 The tests in `tests/` import the built `index.js`, so run `pnpm build` before `pnpm test`.
 
+`index.ts` must work in browsers too, so it can use only ECMAScript APIs; `tsconfig.json` makes Node and DOM APIs type errors. vitest runs `tests/*.test.ts` in Node and, except for `*.node.test.ts`, in headless Chrome, where `index.ts` formats values with node-inspect-extracted instead of `util.inspect`.
+
 # Before committing
 
 At the workspace root:
 
 	pnpm build # runs tsc, regenerating index.js and index.d.ts
-	pnpm test  # runs vitest, then tsc --noEmit on the tests, then biome lint
+	pnpm test  # runs vitest in Node and in google-chrome via Playwright, then tsc --noEmit on the tests, then biome lint
 
 # Committing
 

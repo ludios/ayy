@@ -1,6 +1,6 @@
 {
 	"files": {
-		"includes": ["index.ts", "tests/*.ts"]
+		"includes": ["index.ts", "tests/*.ts", "vitest.config.ts"]
 	},
 	"linter": {
 		"enabled": true
