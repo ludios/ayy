@@ -130,14 +130,14 @@ When there are multiple good ways to implement something, especially involving s
 
 Edit `index.ts` only: `index.js` and `index.d.ts` are generated from it by `pnpm build` and committed alongside it.
 
-The tests in `tests/` use ava, not vitest.
+The tests in `tests/` import the built `index.js`, so run `pnpm build` before `pnpm test`.
 
 # Before committing
 
 At the workspace root:
 
 	pnpm build # runs tsc, regenerating index.js and index.d.ts
-	pnpm test  # runs ava, then tsc --noEmit on the tests, then biome lint
+	pnpm test  # runs vitest, then tsc --noEmit on the tests, then biome lint
 
 # Committing
 

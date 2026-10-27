@@ -13,18 +13,12 @@
 	"type": "module",
 	"scripts": {
 		"build": "./node_modules/.bin/tsc",
-		"test": "./node_modules/.bin/ava tests/*.ts && ./node_modules/.bin/tsc --ignoreConfig --types node --noEmit && biome lint"
+		"test": "vitest run && ./node_modules/.bin/tsc --ignoreConfig --types node --noEmit && biome lint"
 	},
 	"devDependencies": {
 		"@types/node": "^26.0.1",
-		"ava": "^8.0.1",
-		"typescript": "^6.0.3"
-	},
-	"ava": {
-		"nodeArguments": [
-			"--experimental-strip-types",
-			"--no-warnings=ExperimentalWarning"
-		]
+		"typescript": "^6.0.3",
+		"vitest": "^5.0.5"
 	},
 	"author": "Ivan Kozik",
 	"license": "ISC",
