@@ -30,15 +30,15 @@ export default defineConfig({
 			{
 				test: {
 					name: "node",
-					include: ["tests/**/*.test.ts"],
+					include: ["tests/*.test.ts"],
 				},
 			},
 			{
 				test: {
 					name: "chrome",
-					include: ["tests/**/*.test.ts"],
+					include: ["tests/*.test.ts"],
 					// These use Node APIs
-					exclude: ["tests/**/*.node.test.ts"],
+					exclude: ["tests/*.node.test.ts"],
 					browser: {
 						enabled: true,
 						headless: true,
