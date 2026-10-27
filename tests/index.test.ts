@@ -95,3 +95,19 @@ test("AssertionError's own properties are its name and then its message", () => 
 	const error = new AssertionError("A(...): 0 not truthy", A);
 	expect(JSON.stringify(error)).toBe('{"name":"AssertionError","message":"A(...): 0 not truthy"}');
 });
+
+test("AssertionError works without Error.captureStackTrace", () => {
+	const error_constructor = Error as { captureStackTrace?: unknown };
+	const capture_stack_trace = error_constructor.captureStackTrace;
+	let error: unknown;
+	error_constructor.captureStackTrace = undefined;
+	try {
+		A.eq(3, 4);
+	} catch (e) {
+		error = e;
+	} finally {
+		error_constructor.captureStackTrace = capture_stack_trace;
+	}
+	expect(error).toBeInstanceOf(AssertionError);
+	expect(error).toHaveProperty("message", "A.eq(...): 3 !== 4");
+});
