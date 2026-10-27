@@ -1,6 +1,6 @@
 // Model-output: Claude Opus 5.5
 
-import { existsSync } from "node:fs";
+import { statSync } from "node:fs";
 import { delimiter, join } from "node:path";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
@@ -8,12 +8,16 @@ import { defineConfig } from "vitest/config";
 /**
  * Find a program in the directories in $PATH.
  * @param program the program's file name
- * @returns the program's path, or undefined if it's in none of them
+ * @returns the path of the first file named `program` in them, or undefined if there is none
  */
 function find_on_path(program: string): string | undefined {
 	for (const dir of (process.env.PATH ?? "").split(delimiter)) {
+		// An empty entry would mean the current directory
+		if (dir === "") {
+			continue;
+		}
 		const path = join(dir, program);
-		if (existsSync(path)) {
+		if (statSync(path, { throwIfNoEntry: false })?.isFile()) {
 			return path;
 		}
 	}
