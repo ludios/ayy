@@ -80,5 +80,5 @@ test("other kinds of values look the same as with util.inspect", () => {
 test("values that can't be formatted still make assertions fail with AssertionError", () => {
 	const { proxy, revoke } = Proxy.revocable({}, {});
 	revoke();
-	expect(ayy_inspect(proxy)).toBe("<uninspectable value>");
+	expect(ayy_inspect(proxy)).toMatch(/^<uninspectable value: TypeError: .*revoked/);
 });

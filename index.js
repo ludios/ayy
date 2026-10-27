@@ -12,15 +12,16 @@ function runtime_inspect() {
 /**
  * Format `value` for an assertion error message with the runtime's `util.inspect`, or else with
  * node-inspect-extracted, a copy of it for runtimes without it, like browsers.
- * @returns the formatted value, or "<uninspectable value>" if formatting it threw, as it does
- *          e.g. for a revoked Proxy outside Node, so that the assertion still fails with its own error
+ * @returns the formatted value, or if formatting it threw (e.g. for a revoked Proxy outside Node,
+ *          or a custom inspect function with a bug), "<uninspectable value: ...>" with what was
+ *          thrown, so that the assertion still fails with its own error
  */
 function inspect(value) {
     try {
         return (runtime_inspect() ?? extracted_inspect)(value);
     }
-    catch {
-        return "<uninspectable value>";
+    catch (error) {
+        return `<uninspectable value: ${error instanceof Error ? `${error.name}: ${error.message}` : typeof error}>`;
     }
 }
 export class AssertionError extends Error {

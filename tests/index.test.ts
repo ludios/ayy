@@ -127,3 +127,13 @@ test("messages show values the way util.inspect does", () => {
 		"A.lt(...): !(1970-01-01T00:00:00.000Z < [Function: f])");
 	expect_assertion_error(() => A.neq<unknown>(Point, Point), "A.neq(...): [class Point] === [class Point]");
 });
+
+test("a value that throws while being formatted is shown as what it threw", () => {
+	const value = {
+		[Symbol.for("nodejs.util.inspect.custom")]() {
+			throw new Error("bug in a custom inspect function");
+		},
+	};
+	expect_assertion_error(() => A.eq<unknown>(value, 1),
+		"A.eq(...): <uninspectable value: Error: bug in a custom inspect function> !== 1");
+});
