@@ -1,4 +1,9 @@
 export declare class AssertionError extends Error {
+    /**
+     * @param message the whole error message
+     * @param stackStartFn the function whose caller should be at the top of the stack;
+     *        in engines without `Error.captureStackTrace`, the stack starts inside ayy instead
+     */
     constructor(message: string, stackStartFn: Function);
 }
 type MessageOrFn = string | (() => string);

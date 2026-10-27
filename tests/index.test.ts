@@ -75,3 +75,23 @@ test("A.gte", () => {
 	A.gte(3, 2);
 	expect_assertion_error(() => A.gte(3, 4), "A.gte(...): !(3 >= 4)");
 });
+
+test("the stack starts with the message, then the caller", () => {
+	function caller() {
+		A.eq(3, 4);
+	}
+	let stack: string | undefined;
+	try {
+		caller();
+	} catch (e) {
+		A(e instanceof AssertionError);
+		stack = e.stack;
+	}
+	// The format of V8's stacks, which Node and Chrome have
+	expect(stack).toMatch(/^AssertionError: A\.eq\(\.\.\.\): 3 !== 4\n {4}at caller\b/);
+});
+
+test("AssertionError's own properties are its name and then its message", () => {
+	const error = new AssertionError("A(...): 0 not truthy", A);
+	expect(JSON.stringify(error)).toBe('{"name":"AssertionError","message":"A(...): 0 not truthy"}');
+});
