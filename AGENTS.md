@@ -128,11 +128,11 @@ When there are multiple good ways to implement something, especially involving s
 
 `ayy` is the assertion library that "Libraries to use" recommends, so other projects depend on its API and on the wording of its error messages.
 
-Edit `index.ts` only: `index.js` and `index.d.ts` are generated from it by `pnpm build` and committed alongside it.
+Edit `index.ts`, not `index.js` and `index.d.ts`: those are generated from it by `pnpm build` and committed alongside it. `inspect_node.js` is not generated.
 
 The tests in `tests/` import the built `index.js`, so run `pnpm build` before `pnpm test`.
 
-`index.ts` must work in browsers too, so it can use only ECMAScript APIs; `tsconfig.json` makes Node and DOM APIs type errors. It formats values with `inspect` from `#inspect`, which `package.json`'s "imports" resolves to `util` in Node, Bun, and Deno, and to @ludios/node-inspect-extracted (our fork of node-inspect-extracted, with an ES module build) elsewhere. vitest runs `tests/*.test.ts` in Node and, except for `*.node.test.ts`, in headless Chrome, where they check the latter.
+`index.ts` must work in browsers too, so it can use only ECMAScript APIs; `tsconfig.json` makes Node and DOM APIs type errors. It formats values with `inspect` from `#inspect`, which `package.json`'s "imports" resolves to `inspect_node.js` (`util.inspect` from "node:util") in Node, Bun, and Deno, and to @ludios/node-inspect-extracted (our fork of node-inspect-extracted, with an ES module build) elsewhere. vitest runs `tests/*.test.ts` in Node and, except for `*.node.test.ts`, in headless Chrome, where they check the latter.
 
 # Before committing
 

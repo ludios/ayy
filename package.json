@@ -12,12 +12,13 @@
 	"types": "index.d.ts",
 	"files": [
 		"index.js",
-		"index.d.ts"
+		"index.d.ts",
+		"inspect_node.js"
 	],
 	"type": "module",
 	"imports": {
 		"#inspect": {
-			"node": "util",
+			"node": "./inspect_node.js",
 			"default": "@ludios/node-inspect-extracted"
 		}
 	},
@@ -31,7 +32,6 @@
 	"devDependencies": {
 		"@types/node": "^26.6.5",
 		"@vitest/browser-playwright": "^5.0.5",
-		"fast-check": "^4.10.2",
 		"playwright": "^1.64.1",
 		"typescript": "^7.0.2",
 		"vitest": "^5.0.5"
@@ -40,6 +40,6 @@
 	"license": "ISC",
 	"repository": "ludios/ayy",
 	"engines": {
-		"node": ">= 14"
+		"node": ">= 14.13.1"
 	}
 }

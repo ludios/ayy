@@ -1,11 +1,12 @@
 // Model-output: Claude Opus 5.5
 
-// package.json's "imports" makes this `util.inspect` in Node, Bun, and Deno, and elsewhere,
-// like in browsers, node-inspect-extracted's copy of it.
+// package.json's "imports" makes this `util.inspect` from "node:util" in Node, Bun, and Deno,
+// and elsewhere, like in browsers, node-inspect-extracted's copy of it.
 import { inspect as util_inspect } from "#inspect";
 
 /**
- * Format `value` for an assertion error message with `util.inspect`.
+ * Format `value` for an assertion error message with `util.inspect`, or in runtimes without it,
+ * node-inspect-extracted's copy, which can't see e.g. a settled Promise's value.
  * @returns the formatted value, or if formatting it threw (e.g. for a revoked Proxy outside Node,
  *          or a custom inspect function with a bug), "<uninspectable value: ...>" with what was
  *          thrown, so that the assertion still fails with its own error

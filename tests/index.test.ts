@@ -137,3 +137,12 @@ test("a value that throws while being formatted is shown as what it threw", () =
 	expect_assertion_error(() => A.eq<unknown>(value, 1),
 		"A.eq(...): <uninspectable value: Error: bug in a custom inspect function> !== 1");
 });
+
+test("a revoked Proxy is shown as one, or as what formatting it threw", () => {
+	const { proxy, revoke } = Proxy.revocable({}, {});
+	revoke();
+	expect(() => A.eq<unknown>(proxy, 1)).toThrow(AssertionError);
+	// util.inspect recognizes revoked Proxies; node-inspect-extracted's copy can't
+	expect(() => A.eq<unknown>(proxy, 1)).toThrow(
+		/^A\.eq\(\.\.\.\): (?:<Revoked Proxy>|<uninspectable value: TypeError: .*revoked.*>) !== 1$/);
+});
