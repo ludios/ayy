@@ -22,6 +22,7 @@ test("A", () => {
 	expect(() => A(0, "explanation")).toThrow(assertion_error("A(...): 0 not truthy: explanation"));
 	expect(() => A(0, () => "explanation")).toThrow(assertion_error("A(...): 0 not truthy: explanation"));
 	// undefined return is supported despite not being validly typed
+	// @ts-expect-error
 	expect(() => A(0, () => undefined)).toThrow(assertion_error("A(...): 0 not truthy: undefined"));
 	// number messages are supported despite not being validly typed
 	// @ts-expect-error
