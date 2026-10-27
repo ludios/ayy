@@ -1,3 +1,4 @@
+// Model-output: Claude Opus 5.5
 import { inspect } from "node:util";
 export class AssertionError extends Error {
     // biome-ignore lint/complexity/noBannedTypes: Function is what stackStartFn is
@@ -5,7 +6,10 @@ export class AssertionError extends Error {
         super();
         this.name = "AssertionError";
         this.message = message;
-        Error.captureStackTrace(this, stackStartFn);
+        // Not every engine has this V8 extension; without it, the stack also shows ayy's own frames.
+        // biome-ignore lint/complexity/noBannedTypes: Function is what V8 accepts
+        Error
+            .captureStackTrace?.(this, stackStartFn);
     }
 }
 function _appendExtraMessage(message, extraMessageOrFn) {
