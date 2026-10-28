@@ -24,7 +24,7 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"test": "vitest run && tsc --ignoreConfig --types node --noEmit tests/*.ts vitest.config.ts && oxlint --deny-warnings index.ts inspect_node.js tests vitest.config.ts"
+		"test": "vitest run && tsc --ignoreConfig --types node --noEmit tests/*.ts vitest.config.ts && oxlint"
 	},
 	"dependencies": {
 		"@ludios/node-inspect-extracted": "^3.3.4"

@@ -1,0 +1,15 @@
+{
+	"plugins": ["typescript", "unicorn", "oxc", "vitest"],
+	"categories": { "correctness": "error" },
+	"rules": {
+		"eqeqeq": "error",
+		"no-var": "error",
+		"typescript/no-empty-object-type": "error",
+		"typescript/no-explicit-any": "error",
+		"typescript/no-unsafe-function-type": "error",
+		"typescript/no-wrapper-object-types": "error",
+		"vitest/expect-expect": ["error", { "assertFunctionNames": ["expect", "expect_assertion_error"] }],
+		"vitest/no-focused-tests": "error"
+	},
+	"ignorePatterns": ["index.js", "index.d.ts"]
+}

@@ -23,6 +23,7 @@ export class AssertionError extends Error {
      * @param stackStartFn the function whose caller should be at the top of the stack;
      *        in engines without `Error.captureStackTrace`, the stack starts inside ayy instead
      */
+    // oxlint-disable-next-line typescript/no-unsafe-function-type -- Function is what stackStartFn is
     constructor(message, stackStartFn) {
         // V8 takes the first line of the stack from the message given to Error's constructor.
         super(message);
@@ -32,6 +33,7 @@ export class AssertionError extends Error {
         this.name = "AssertionError";
         this.message = message;
         // Not every engine has this V8 extension; without it, the stack also shows ayy's own frames.
+        // oxlint-disable-next-line typescript/no-unsafe-function-type -- Function is what V8 accepts
         Error
             .captureStackTrace?.(this, stackStartFn);
     }
