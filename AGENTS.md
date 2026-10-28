@@ -139,7 +139,7 @@ The tests in `tests/` import the built `index.js`, so run `pnpm build` before `p
 At the workspace root:
 
 	pnpm build # runs tsc, regenerating index.js and index.d.ts
-	pnpm test  # runs vitest in Node and in google-chrome via Playwright, then tsc --noEmit on the tests, then biome lint
+	pnpm test  # runs vitest in Node and in google-chrome via Playwright, then tsc --noEmit on the tests, then oxlint
 
 # Committing
 

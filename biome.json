@@ -1,8 +1,0 @@
-{
-	"files": {
-		"includes": ["index.ts", "inspect_node.js", "tests/*.ts", "vitest.config.ts"]
-	},
-	"linter": {
-		"enabled": true
-	}
-}
