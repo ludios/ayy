@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - '@ludios/node-inspect-extracted@3.3.4'
